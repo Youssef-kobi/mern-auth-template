@@ -1,0 +1,9 @@
+.formControl{
+  border-radius: 10px;
+}
+.groupform{
+  background: rgba(188, 143, 143, 0.5);
+}
+.invalid{
+  border: 2px solid red;
+}
