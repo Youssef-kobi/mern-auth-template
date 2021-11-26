@@ -1,69 +1,60 @@
 const formFields = {
   firstName: {
     name: "firstName",
-    label: "First name*",
-    requiredErrorMsg: "First name is required",
+    label: "First name *",
   },
   lastName: {
     name: "lastName",
-    label: "Last name*",
-    requiredErrorMsg: "Last name is required",
+    label: "Last name *",
   },
-  address1: {
-    name: "address1",
-    label: "Address Line 1*",
-    requiredErrorMsg: "Address Line 1 is required",
+  userName: {
+    name: "userName",
+    label: "Username *",
   },
-  address2: {
-    name: "address2",
-    label: "Address Line 2",
+  email: {
+    name: "email",
+    label: "Email *",
   },
-  city: {
-    name: "city",
-    label: "City*",
-    requiredErrorMsg: "City is required",
-  },
-  state: {
-    name: "state",
-    label: "State/Province/Region",
-  },
-  zipcode: {
-    name: "zipcode",
-    label: "Zipcode*",
-    requiredErrorMsg: "Zipcode is required",
-    invalidErrorMsg: "Zipcode is not valid (e.g. 70000)",
+  phone: {
+    name: "phone",
+    label: "Phone number",
   },
   country: {
     name: "country",
     label: "Country*",
-    requiredErrorMsg: "Country is required",
   },
-  useAddressForPaymentDetails: {
-    name: "useAddressForPaymentDetails",
-    label: "Use this address for payment details",
+  // Step 1 Shop Details
+  shopAddress: {
+    name: "shopAddress",
+    label: "shop's Address *",
   },
-  nameOnCard: {
-    name: "nameOnCard",
-    label: "Name on card*",
-    requiredErrorMsg: "Name on card is required",
+  postalCode: {
+    name: "postalCode",
+    label: "Postal code *",
   },
-  cardNumber: {
-    name: "cardNumber",
-    label: "Card number*",
-    requiredErrorMsg: "Card number is required",
-    invalidErrorMsg: "Card number is not valid (e.g. 4111111111111)",
+  shopName: {
+    name: "shopName",
+    label: "Shop's name*",
   },
-  expiryDate: {
-    name: "expiryDate",
-    label: "Expiry date*",
-    requiredErrorMsg: "Expiry date is required",
-    invalidErrorMsg: "Expiry date is not valid",
+  shopSite: {
+    name: "shopSite",
+    label: "Shop's Website",
   },
-  cvv: {
-    name: "cvv",
-    label: "CVV*",
-    requiredErrorMsg: "CVV is required",
-    invalidErrorMsg: "CVV is invalid (e.g. 357)",
+  shopType: {
+    name: "shopType",
+    label: "shop's type *",
+  },
+  shopPhoneNumber: {
+    name: "shopPhoneNumber",
+    label: "Shop's phone number *",
+  },
+  shopEmail: {
+    name: "shopEmail",
+    label: "Shop's Email *",
+  },
+  salesTax: {
+    name: "salesTax",
+    label: "Sales tax*",
   },
 };
 export default formFields;

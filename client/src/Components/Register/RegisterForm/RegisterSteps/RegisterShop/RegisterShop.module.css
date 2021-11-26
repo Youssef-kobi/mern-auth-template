@@ -1,0 +1,12 @@
+.imgContainer {
+  border-radius: 50%;
+  background: linear-gradient(76deg, #3fa1a9, #79f1a4);
+  padding: 1px;
+  width: 10rem;
+  height: 10rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.imgContainer img {
+  width: 100%;
+}

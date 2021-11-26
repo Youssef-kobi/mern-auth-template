@@ -1,27 +1,25 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Classes from "./Register.module.css";
-import FormFilds from "./RegisterFormData";
+import formFields from "./RegisterFormData";
 import {
   Stepper,
   Step,
   StepLabel,
-  // Button,
-  // Typography,
-  // CircularProgress
+  Button,
+  CircularProgress,
 } from "@material-ui/core";
 import { useState } from "react";
-import RegisterPersonal from "./RegisterSteps/RegisterPersonal";
-// import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import RegisterPersonal from "./RegisterSteps/RegisterPersonal/RegisterPersonal";
+import RegisterShop from "./RegisterSteps/RegisterShop/RegisterShop";
 
 const renderStepContent = (step) => {
   switch (step) {
     case 0:
-      return <RegisterPersonal formField={FormFilds} />;
+      return <RegisterPersonal formField={formFields} />;
     // break;
     case 1:
-      break;
-    // return <PaymentForm formField={formField} />;
+      return <RegisterShop formField={formFields} />;
     case 2:
       break;
     // return <ReviewOrder />;
@@ -36,12 +34,14 @@ const Register = () => {
     lastName: "",
     userName: "",
     email: "",
+    phone: "",
+    country: "",
     password: "",
     confPassword: "",
     phoneNumber: "",
   };
   const [activeStep, setActiveStep] = useState(0);
-  // const currentValidationSchema = validationSchema[activeStep];
+  // const [isSubmitting, setisSubmitting] = useState(false);
   const isLastStep = activeStep === steps.length - 1;
   const handleSubmit = (values, actions) => {
     if (isLastStep) {
@@ -49,24 +49,41 @@ const Register = () => {
       // _submitForm(values, actions);
     } else {
       setActiveStep(activeStep + 1);
-      console.log(values);
+      // console.log(values);
       // actions.setTouched({});
-      // actions.setSubmitting(false);
+      actions.setSubmitting(false);
     }
   };
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const validationSchema = Yup.object({
-    lastName: Yup.string().required("Please select a product"),
-    firstName: Yup.string("string ahya").required("hololo"),
-    // email: Yup.string().email().required(),
-    // password: Yup.string().required(),
-    // review: Yup.string().required(),
+    firstName: Yup.string()
+      .min(3, "First name must be at least 3 characters")
+      .max(20, "First name must be at most 20 characters")
+      .required("required"),
+    lastName: Yup.string()
+      .min(3, "Last name must be at least 3 characters")
+      .max(20, "Last name must be at most 20 characters")
+      .required("required"),
+    email: Yup.string().email().required(),
+    phone: Yup.string().matches(
+      phoneRegExp,
+      "This is not a valide phone number"
+    ),
     // rating: Yup.number().min(1).max(10).required(),
     // date: Yup.date().default(() => new Date()),
     // wouldRecommend: Yup.boolean().default(false),
   });
   return (
-    <div className={Classes.form}>
-      <Stepper alternativeLabel activeStep={0}>
+    <div className={Classes.main}>
+      <Stepper
+        className={Classes.stepper}
+        alternativeLabel
+        activeStep={activeStep}
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -78,7 +95,35 @@ const Register = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={Classes.form}>{renderStepContent(activeStep)}</Form>
+        {({ isSubmitting }) => (
+          <Form className={Classes.form}>
+            {renderStepContent(activeStep)}
+            <div className={Classes.btnsflex}>
+              {activeStep !== 0 && !isSubmitting && (
+                <Button type="button" onClick={handleBack}>
+                  Back
+                </Button>
+              )}
+              <div>
+                <Button
+                  disabled={isSubmitting}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  // className={classes.button}
+                >
+                  {isLastStep ? "Place order" : "Next"}
+                </Button>
+                {isSubmitting && (
+                  <CircularProgress
+                    size={24}
+                    // className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+            </div>
+          </Form>
+        )}
       </Formik>
     </div>
   );
