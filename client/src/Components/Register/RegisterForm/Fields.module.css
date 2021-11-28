@@ -1,3 +1,19 @@
-.invalid{
-  border: 2px solid red;
+.imgContainer {
+  border-radius: 50%;
+  background: linear-gradient(180deg, #3fa1a9, #3f51b5);
+  border: 5px solid #3f51b5;
+  width: 10rem;
+  height: 10rem;
+  margin-bottom: .5rem;
+  overflow: hidden;
+  position: relative;
+}
+.imgContainer img {
+  width: 100%;
+}
+.profileimg{
+  	pointer-events: visible;
+}
+.btn{
+  width: 100%;
 }

@@ -13,10 +13,10 @@ import { useState } from "react";
 import RegisterPersonal from "./RegisterSteps/RegisterPersonal/RegisterPersonal";
 import RegisterShop from "./RegisterSteps/RegisterShop/RegisterShop";
 
-const renderStepContent = (step) => {
+const renderStepContent = (step,setFieldValue) => {
   switch (step) {
     case 0:
-      return <RegisterPersonal formField={formFields} />;
+      return <RegisterPersonal setFieldValue={setFieldValue} formField={formFields} />;
     // break;
     case 1:
       return <RegisterShop formField={formFields} />;
@@ -30,6 +30,7 @@ const renderStepContent = (step) => {
 const Register = () => {
   const steps = ["Personal information", "Shop details", "Review your order"];
   const initialValues = {
+    profilePicture: null,
     firstName: "",
     lastName: "",
     userName: "",
@@ -95,9 +96,11 @@ const Register = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form className={Classes.form}>
-            {renderStepContent(activeStep)}
+             
+            {renderStepContent(activeStep,setFieldValue)}
+  
             <div className={Classes.btnsflex}>
               {activeStep !== 0 && !isSubmitting && (
                 <Button type="button" onClick={handleBack}>

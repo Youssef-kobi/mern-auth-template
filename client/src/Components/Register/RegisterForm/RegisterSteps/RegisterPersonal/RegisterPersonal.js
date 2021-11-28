@@ -1,27 +1,23 @@
 import Fields from "../../Fields";
-import { Grid,Input } from "@material-ui/core";
-import Classes from "./RegisterPersonal.module.css";
-import PersonalLogo from "../../../../../assets/PersonalLogo.svg";
-import { motion } from "framer-motion";
-
+import { Grid } from "@material-ui/core";
 const RegisterPersonal = (props) => {
-  const { firstName, lastName, userName, email, phone, country } =
+  const { profileImg, firstName, lastName, userName, email, phone, country } =
     props.formField;
+
   return (
     <>
-    
-      <label htmlFor="PersonalPicture">
-        <Input
-          accept="image/*"
-          id="PersonalPicture"
-          style={{ display: "none" }}
-          type="file"
-        />
-        <div className={Classes.imgContainer}>
-          <img htmlFor="PersonalPicture" src={PersonalLogo} alt="helloxs" />
-        </div>
-      </label>
       <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          item
+          xs={12}
+        >
+          <Fields setFieldValue={props.setFieldValue} field={profileImg} />
+        </Grid>
         <Grid item xs={6}>
           <Fields field={firstName} />
         </Grid>
