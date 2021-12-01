@@ -13,10 +13,10 @@ import { useState } from "react";
 import RegisterPersonal from "./RegisterSteps/RegisterPersonal/RegisterPersonal";
 import RegisterShop from "./RegisterSteps/RegisterShop/RegisterShop";
 
-const renderStepContent = (step,setFieldValue) => {
+const renderStepContent = (step,formik) => {
   switch (step) {
     case 0:
-      return <RegisterPersonal setFieldValue={setFieldValue} formField={formFields} />;
+      return <RegisterPersonal formik={formik} formField={formFields} />;
     // break;
     case 1:
       return <RegisterShop formField={formFields} />;
@@ -46,9 +46,9 @@ const Register = () => {
   const isLastStep = activeStep === steps.length - 1;
   const handleSubmit = (values, actions) => {
     if (isLastStep) {
-      console.log(values);
       // _submitForm(values, actions);
     } else {
+      console.log(values);
       setActiveStep(activeStep + 1);
       // console.log(values);
       // actions.setTouched({});
@@ -74,6 +74,7 @@ const Register = () => {
       phoneRegExp,
       "This is not a valide phone number"
     ),
+    country: Yup.string().required("required"),
     // rating: Yup.number().min(1).max(10).required(),
     // date: Yup.date().default(() => new Date()),
     // wouldRecommend: Yup.boolean().default(false),
@@ -96,20 +97,20 @@ const Register = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {(formik) => (
           <Form className={Classes.form}>
              
-            {renderStepContent(activeStep,setFieldValue)}
+            {renderStepContent(activeStep,formik)}
   
             <div className={Classes.btnsflex}>
-              {activeStep !== 0 && !isSubmitting && (
+              {activeStep !== 0 && !formik.isSubmitting && (
                 <Button type="button" onClick={handleBack}>
                   Back
                 </Button>
               )}
               <div>
                 <Button
-                  disabled={isSubmitting}
+                  disabled={formik.isSubmitting}
                   type="submit"
                   variant="contained"
                   color="primary"
@@ -117,7 +118,7 @@ const Register = () => {
                 >
                   {isLastStep ? "Place order" : "Next"}
                 </Button>
-                {isSubmitting && (
+                {formik.isSubmitting && (
                   <CircularProgress
                     size={24}
                     // className={classes.buttonProgress}

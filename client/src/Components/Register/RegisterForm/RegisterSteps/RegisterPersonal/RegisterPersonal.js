@@ -1,8 +1,16 @@
 import Fields from "../../Fields";
 import { Grid } from "@material-ui/core";
 const RegisterPersonal = (props) => {
-  const { profileImg, firstName, lastName, userName, email, phone, country } =
-    props.formField;
+  const {
+    profileImg,
+    firstName,
+    lastName,
+    userName,
+    email,
+    phone,
+    country,
+    password,
+  } = props.formField;
 
   return (
     <>
@@ -16,7 +24,7 @@ const RegisterPersonal = (props) => {
           item
           xs={12}
         >
-          <Fields setFieldValue={props.setFieldValue} field={profileImg} />
+          <Fields formik={props.formik} field={profileImg} />
         </Grid>
         <Grid item xs={6}>
           <Fields field={firstName} />
@@ -34,7 +42,13 @@ const RegisterPersonal = (props) => {
           <Fields field={phone} />
         </Grid>
         <Grid item xs={12}>
-          <Fields field={country} />
+          <Fields formik={props.formik} field={country} />
+        </Grid>
+        <Grid item xs={12}>
+          <Fields formik={props.formik} field={password} />
+        </Grid>
+        <Grid item xs={12}>
+          <Fields formik={props.formik} field={password} />
         </Grid>
       </Grid>
     </>

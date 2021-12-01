@@ -1,33 +1,17 @@
 import { useField } from "formik";
-import {
-  TextField,
-  Typography,
-  Input,
-  Button,
-  MenuItem,
-} from "@material-ui/core";
+import { TextField, Typography, Input, Button } from "@material-ui/core";
 import Classes from "./Fields.module.css";
 import PersonalLogo from "./../../../assets/PersonalLogo.svg";
-// import Classes from "./Fields.module.css";
-
-import React, { useState, useMemo, useRef } from "react";
-import countryList from "react-select-country-list";
-// import { useState } from "react";
+import SelectField from "./SelectField";
+import React, { useState } from "react";
 const Fields = (props) => {
   const [profileImg, setprofileImg] = useState("");
   const { name, label, type } = props.field;
   const [field, meta] = useField(name);
-  const [value, setValue] = useState("");
-  const Selected = useRef("");
-  const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = (value) => {
-    console.log(Selected.current);
-    setValue(value.target.value);
-  };
   const imageChangeHandler = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      props.setFieldValue(
+      props.formik.setFieldValue(
         "profilePicture",
         URL.createObjectURL(e.currentTarget.files[0])
       );
@@ -43,20 +27,16 @@ const Fields = (props) => {
     error: false,
     helperText: "",
   };
-  const SelectFieldConfig = {
-    ...field,
-    // ...props.field,
-    fullWidth: true,
-    variant: "outlined",
-    // select: true,
-    label: label,
-    name: name,
-    error: false,
-    
-    value: value,
-    helperText: "",
-    onChange: changeHandler,
-  };
+
+  // const SelectFieldConfig = {
+  //   ...field,
+  //   fullWidth: true,
+  //   variant: "outlined",
+  //   label: label,
+  //   name: name,
+  //   error: false,
+  //   helperText: "Please select your country",
+  // };
   if (type === "text") {
     if (meta && meta.touched && meta.error) {
       TextFieldConfig.error = true;
@@ -64,9 +44,15 @@ const Fields = (props) => {
     }
   }
   if (type === "picture") {
-    console.log(type);
+    // console.log(type);
   }
 
+  if (type === "select") {
+    // if (meta && meta.touched && meta.error) {
+    //   SelectFieldConfig.error = true;
+    //   SelectFieldConfig.helperText = meta.error;
+    // }
+  }
   return (
     <>
       {type === "text" && (
@@ -79,7 +65,7 @@ const Fields = (props) => {
           <div className={Classes.imgContainer}>
             <img
               src={profileImg ? URL.createObjectURL(profileImg) : PersonalLogo}
-              alt="helloxs"
+              alt="img"
             />
           </div>
           <label htmlFor="profilePicture" className={Classes.profileimg}>
@@ -105,13 +91,7 @@ const Fields = (props) => {
       )}
       {type === "select" && (
         <Typography component={"span"}>
-          <TextField select {...SelectFieldConfig}>
-            {options.map((option) => (
-              <MenuItem  key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+          <SelectField formik={props.formik} label={label} field={field} meta={meta}></SelectField>
         </Typography>
       )}
     </>

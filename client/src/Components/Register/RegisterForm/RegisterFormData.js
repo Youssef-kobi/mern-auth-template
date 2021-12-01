@@ -1,4 +1,4 @@
-// import countryList from "react-select-country-list";
+//  import countryList from "react-select-country-list";
 const formFields = {
   profileImg: {
     name: "profilePicture",
