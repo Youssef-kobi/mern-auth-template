@@ -1,4 +1,5 @@
 //  import countryList from "react-select-country-list";
+import { countries, ShopTypes } from "./Options";
 const formFields = {
   profileImg: {
     name: "profilePicture",
@@ -20,6 +21,16 @@ const formFields = {
     label: "Username *",
     type: "text",
   },
+  password: {
+    name: "password",
+    label: "Password *",
+    type: "password",
+  },
+  confPassword: {
+    name: "confPassword",
+    label: "Password confirmation *",
+    type: "password",
+  },
   email: {
     name: "email",
     label: "Email *",
@@ -34,6 +45,7 @@ const formFields = {
     name: "country",
     label: "Country*",
     type: "select",
+    options: countries,
   },
   // Step 1 Shop Details
   shopAddress: {
@@ -60,6 +72,7 @@ const formFields = {
     name: "shopType",
     label: "shop's type *",
     type: "select",
+    options: ShopTypes,
   },
   shopPhoneNumber: {
     name: "shopPhoneNumber",

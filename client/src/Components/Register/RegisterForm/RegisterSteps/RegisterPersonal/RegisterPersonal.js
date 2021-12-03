@@ -10,6 +10,7 @@ const RegisterPersonal = (props) => {
     phone,
     country,
     password,
+    confPassword
   } = props.formField;
 
   return (
@@ -44,11 +45,11 @@ const RegisterPersonal = (props) => {
         <Grid item xs={12}>
           <Fields formik={props.formik} field={country} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <Fields formik={props.formik} field={password} />
         </Grid>
-        <Grid item xs={12}>
-          <Fields formik={props.formik} field={password} />
+        <Grid item xs={6}>
+          <Fields formik={props.formik} field={confPassword} />
         </Grid>
       </Grid>
     </>

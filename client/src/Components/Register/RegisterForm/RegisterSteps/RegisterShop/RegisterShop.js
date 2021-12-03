@@ -51,7 +51,7 @@ const RegisterShop = (props) => {
           <Fields field={shopSite} />
         </Grid>
         <Grid item xs={6}>
-          <Fields field={shopType} />
+          <Fields formik={props.formik} field={shopType} />
         </Grid>
         <Grid item xs={6}>
           <Fields field={shopPhoneNumber} />

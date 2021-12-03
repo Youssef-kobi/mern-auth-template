@@ -6,7 +6,7 @@ import SelectField from "./SelectField";
 import React, { useState } from "react";
 const Fields = (props) => {
   const [profileImg, setprofileImg] = useState("");
-  const { name, label, type } = props.field;
+  const { name, label, type,options } = props.field;
   const [field, meta] = useField(name);
 
   const imageChangeHandler = (e) => {
@@ -28,19 +28,20 @@ const Fields = (props) => {
     helperText: "",
   };
 
-  // const SelectFieldConfig = {
-  //   ...field,
-  //   fullWidth: true,
-  //   variant: "outlined",
-  //   label: label,
-  //   name: name,
-  //   error: false,
-  //   helperText: "Please select your country",
-  // };
+  const PasswordFieldConfig = {
+    ...field,
+    fullWidth: true,
+    variant: "outlined",
+    label: label,
+    type: "password",
+    name: name,
+    error: false,
+    // helperText: "Please select your country",
+  };
   if (type === "text") {
     if (meta && meta.touched && meta.error) {
-      TextFieldConfig.error = true;
-      TextFieldConfig.helperText = meta.error;
+      TextFieldConfig.error = true
+      TextFieldConfig.helperText = meta.error
     }
   }
   if (type === "picture") {
@@ -52,6 +53,12 @@ const Fields = (props) => {
     //   SelectFieldConfig.error = true;
     //   SelectFieldConfig.helperText = meta.error;
     // }
+  }
+  if (type === "password") {
+    if (meta && meta.touched && meta.error) {
+      PasswordFieldConfig.error = true;
+      PasswordFieldConfig.helperText = meta.error;
+    }
   }
   return (
     <>
@@ -91,7 +98,12 @@ const Fields = (props) => {
       )}
       {type === "select" && (
         <Typography component={"span"}>
-          <SelectField formik={props.formik} label={label} field={field} meta={meta}></SelectField>
+          <SelectField formik={props.formik} options={options} name={name} label={label} field={field} meta={meta}></SelectField>
+        </Typography>
+      )}
+      {type === "password" && (
+        <Typography component={"span"}>
+          <TextField {...PasswordFieldConfig} />
         </Typography>
       )}
     </>
