@@ -1,7 +1,9 @@
-//  import countryList from "react-select-country-list";
-import { countries, ShopTypes } from "./Options";
+import { countries, ShopTypes } from "./Fields/Options";
+import PersonalLogo from "../../../assets/PersonalLogo.svg";
+import ShopLogo from "../../../assets/ShopLogo.svg";
 const formFields = {
   profileImg: {
+    defaultImg: PersonalLogo,
     name: "profilePicture",
     label: "Profile picture",
     type: "picture",
@@ -47,7 +49,18 @@ const formFields = {
     type: "select",
     options: countries,
   },
+  termsOfUse: {
+    name: "termsOfUse",
+    label: `Please read and Accept our `,
+    type: "checkbox",
+  },
   // Step 1 Shop Details
+  shopImg: {
+    defaultImg: ShopLogo,
+    name: "shopImg",
+    label: "Shop Picture",
+    type: "picture",
+  },
   shopAddress: {
     name: "shopAddress",
     label: "shop's Address *",

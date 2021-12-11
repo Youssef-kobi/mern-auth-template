@@ -1,4 +1,4 @@
-import Fields from "../../Fields";
+import Fields from "../../Fields/Fields";
 import { Grid } from "@material-ui/core";
 const RegisterPersonal = (props) => {
   const {
@@ -10,7 +10,7 @@ const RegisterPersonal = (props) => {
     phone,
     country,
     password,
-    confPassword
+    confPassword,
   } = props.formField;
 
   return (

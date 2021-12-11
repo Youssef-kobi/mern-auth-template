@@ -1,10 +1,9 @@
-import Fields from "../../Fields";
-import { Grid, Input } from "@material-ui/core";
-import Classes from "./RegisterShop.module.css";
-import ShopLogo from "../../../../../assets/ShopLogo.svg";
+import Fields from "../../Fields/Fields";
+import { Grid} from "@material-ui/core";
 
 const RegisterShop = (props) => {
   const {
+    shopImg,
     shopAddress,
     postalCode,
     shopName,
@@ -13,31 +12,22 @@ const RegisterShop = (props) => {
     shopPhoneNumber,
     shopEmail,
     salesTax,
+    termsOfUse,
   } = props.formField;
-  // const ImgUpload =({
-  //   onChange,
-  //   src
-  // })=>
-  // <label htmlFor="photo-upload" className="custom-file-upload fas">
-  // <div className="img-wrap img-upload" >
-  //   <img for="photo-upload" src={src}/>
-  // </div>
-  // <input id="photo-upload" type="file" onChange={onChange}/>
-  // </label>
   return (
     <>
-      <label htmlFor="logoPicture">
-        <Input
-          accept="image/*"
-          id="logoPicture"
-          style={{ display: "none" }}
-          type="file"
-        />
-        <div className={Classes.imgContainer}>
-          <img htmlFor="logoPicture" src={ShopLogo} alt="helloxs" />
-        </div>
-      </label>
       <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          item
+          xs={12}
+        >
+          <Fields formik={props.formik} field={shopImg} />
+        </Grid>
         <Grid item xs={10}>
           <Fields field={shopAddress} />
         </Grid>
@@ -61,6 +51,9 @@ const RegisterShop = (props) => {
         </Grid>
         <Grid item xs={12}>
           <Fields field={salesTax} />
+        </Grid>
+        <Grid item xs={12}>
+          <Fields formik={props.formik} field={termsOfUse} />
         </Grid>
       </Grid>
     </>
