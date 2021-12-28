@@ -1,23 +1,23 @@
-import "./App.css";
-import Register from "./Components/Register/RegisterForm/Register";
+// import "./App.css";
+import Register from "./Components/Auth/Register/Register";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Login from "./Components/Auth/Login/Login";
+import Classes from "./App.module.css";
 
 function App() {
   return (
     <div className="App">
-      {/* <Register /> */}
       <BrowserRouter>
         <Header />
+        <main className={Classes.main}>
           <Routes>
             <Route index element={<Home />} />
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/Testimonial" exact> */}
-            {/* <Testimonial /> */}
-            {/* </Route> */}
+            <Route path="/login" element={<Login />} />
           </Routes>
-        {/* <Footer /> */}
+        </main>
       </BrowserRouter>
     </div>
   );

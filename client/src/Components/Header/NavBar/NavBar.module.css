@@ -5,9 +5,20 @@
   .navbar {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+    width: 90%;
     align-items: center;
     opacity: 1;
+  }
+  .navbar__logged{
+    /* width: 20%; */
+    display: flex;
+    justify-content: space-around;
+  }
+  .navbar__logged a{
+    /* width: 20%; */
+    margin-left: 1rem;
+    /* display: flex;
+    justify-content: space-around; */
   }
   .navbar__items {
     list-style: none;
@@ -15,6 +26,6 @@
     margin: 0;
     display: flex;
     justify-content: space-around;
-    width: 36%;
+    width: 20%;
   }
 }

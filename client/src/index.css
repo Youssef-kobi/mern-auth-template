@@ -24,16 +24,16 @@ code {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #c95bf579;
+  background: rgba(25, 118, 210, 0.5);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 15px;
-  background: #c95bf5;
+  background: #1976d2;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #c95bf5;
+  background: rgba(25, 118, 210, 0.5);
 }

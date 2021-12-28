@@ -1,0 +1,23 @@
+{
+  "name": "mern-auth-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/server.js",
+  "scripts": {
+    "start": "./server/server.js",
+    "server": "nodemon ./server/server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Youssef-kobi/mern-auth-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Youssef-kobi/mern-auth-template/issues"
+  },
+  "homepage": "https://github.com/Youssef-kobi/mern-auth-template#readme",
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  }
+}

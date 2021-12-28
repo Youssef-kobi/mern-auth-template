@@ -1,35 +1,57 @@
 import { Link } from "react-router-dom";
-import { NavBarData } from "./NavBarData";
+// import { NavBarData } from "./NavBarData";
 import NavClasses from "./NavBar.module.css";
 import { Button } from "@material-ui/core";
+import { useContext } from "react";
+import AuthContext from "../../../store/authContext";
 
 const NavBar = () => {
+  const authCtx = useContext(AuthContext);
+  let buttons;
+  if (!authCtx.isLoggedIn) {
+    buttons = (
+      <>
+        <div className={NavClasses.navbar__logged}>
+          <Button
+            component={Link}
+            size="medium"
+            color="primary"
+            to={"/login"}
+            variant="contained"
+            // startIcon={item.img}
+          >
+            Login
+          </Button>        
+          <Button
+            component={Link}
+            size="medium"
+            color="success"
+            to={"/register"}
+            variant="contained"
+            // startIcon={item.img}
+          >
+            Register
+          </Button>
+        </div>
+      </>
+    );
+  } else {
+    buttons = (
+      <Button
+        size="medium"
+        color="primary"
+        onClick={authCtx.logout}
+        variant="contained"
+      >
+        Logout
+      </Button>
+    );
+  }
   return (
     <nav className={NavClasses.navbar}>
-      <ul className={NavClasses.navbar__items}>
-        {NavBarData.map((item, index) => {
-          return (
-            <li className={NavClasses.navbar__item} key={index}>
-              {/* <Link to={item.path}>
-                <span className={NavClasses.linkcontainer}>
-                  <span className={NavClasses.icon}>{item.img}</span>
-                  {item.title}
-                </span>
-              </Link> */}
-              <Button
-                size="medium"
-                color={item.color}
-                href={item.path}
-                variant="contained"
-                startIcon={item.img}
-              >{item.title}
-                {/* <Link to={item.path}></Link> */}
-              </Button>
-              {/* <Button href="\register">Register</Button> */}
-            </li>
-          );
-        })}
-      </ul>
+      {/* <ul className={NavClasses.navbar__items}> */}
+        {buttons}
+      {/* </ul> */}
     </nav>
   );
 };
