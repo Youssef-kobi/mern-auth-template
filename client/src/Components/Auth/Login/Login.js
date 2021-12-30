@@ -12,7 +12,7 @@ const Login = () => {
   const AuthCtx = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (AuthCtx.isLoggedIn === true) {
+    if (AuthCtx.isLoggedIn) {
       console.log(AuthCtx.isLoggedIn)
       navigate("/");
     }
@@ -25,7 +25,7 @@ const Login = () => {
       .post("http://localhost:8000/api/users/login", { email, password })
       .then((response) => {
         AuthCtx.login(response.data.token);
-        console.log(response);
+        navigate("/");
       })
       .catch((error) => {
         if (error.response) {
@@ -38,7 +38,6 @@ const Login = () => {
           console.log(error);
         }
       });
-    navigate("/");
   };
   const Loginfields = {
     email: {

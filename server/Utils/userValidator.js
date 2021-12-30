@@ -25,10 +25,10 @@ const validateUser = {
       .max(20, "Last name must be at most 20 characters")
       .required(" last required"),
     email: Yup.string().email().required("required"),
-    phone: Yup.string().matches(
-      phoneRegExp,
-      "This is not a valide phone number"
-    ),
+    // phone: Yup.string().matches(
+    //   phoneRegExp,
+    //   "This is not a valide phone number"
+    // ),
     // country: Yup.string()
     //   .oneOf(
     //     countries.map((e) => e.label),

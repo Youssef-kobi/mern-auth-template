@@ -26,13 +26,12 @@ export const registerUser = async (req, res) => {
     // }
     const newUser = await User.create(user);
     res.status(201).json({
-      success: true,
-      data: {
+      token: generateToken(newUser._id),
+      user: {
         ...user,
         // fullName: newUser.fullName,
         // username: newUser.username,
         // email: newUser.email,
-        token: generateToken(newUser._id),
         id: newUser._id,
       },
     });
@@ -47,6 +46,7 @@ export const registerUser = async (req, res) => {
 // @METHOD POST
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email)
   try {
     let user = await User.findOne({
       email,

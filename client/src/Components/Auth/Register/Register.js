@@ -9,10 +9,13 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RegisterPersonal from "./RegisterSteps/RegisterPersonal/RegisterPersonal";
 import RegisterShop from "./RegisterSteps/RegisterShop/RegisterShop";
 import validationSchema from "./Validations";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../store/authContext";
+import axios from "axios";
 
 const renderStepContent = (step, formik) => {
   switch (step) {
@@ -53,21 +56,51 @@ const Register = () => {
   };
   const [activeStep, setActiveStep] = useState(0);
   const isLastStep = activeStep === steps.length - 1;
-  const submitForm = async (values, actions) => {
-    try {
-      const user = { ...values };
-      console.log(user)
-      const res = await fetch("http://localhost:8000/api/users/register", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(await res.json());
-    } catch (err) {
-      console.log(err);
+  const AuthCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (AuthCtx.isLoggedIn) {
+      console.log(AuthCtx.isLoggedIn)
+      navigate("/");
     }
+
+  },)
+  const submitForm = async (values, actions) => {
+    const user = { ...values };
+    // try {
+    //   console.log(user)
+    //   const res = await fetch("http://172.22.74.211:8000/api/users/register", {
+    //     method: "POST",
+    //     body: JSON.stringify(user),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   navigate("/");
+    //   console.log(await res.json());
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    
+    axios
+      .post("http://172.22.74.211:8000/api/users/register", user)
+      .then((response) => {
+        AuthCtx.login(response.data.user.token);
+        console.log('response');
+        console.log(response);
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error.response) {
+          // actions.setFieldError("email", "email is already used");
+          console.log(error.response);
+          console.log("server responded");
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
   const handleSubmit = (values, actions) => {
     if (isLastStep) {
