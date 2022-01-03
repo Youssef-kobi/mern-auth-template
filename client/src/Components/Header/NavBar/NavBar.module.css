@@ -9,12 +9,12 @@
     align-items: center;
     opacity: 1;
   }
-  .navbar__logged{
+  .navbar__logged {
     /* width: 20%; */
     display: flex;
     justify-content: space-around;
   }
-  .navbar__logged a{
+  .navbar__logged a {
     /* width: 20%; */
     margin-left: 1rem;
     /* display: flex;

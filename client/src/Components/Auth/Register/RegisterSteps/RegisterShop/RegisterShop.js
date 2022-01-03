@@ -1,8 +1,10 @@
-import Fields from "../../../Fields/Fields";
-import { Grid} from "@material-ui/core";
+import { Grid } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import Fields from '../../../Fields/Fields'
 
-const RegisterShop = (props) => {
-  const {
+const RegisterShop = ({
+  formik,
+  formField: {
     shopImg,
     shopAddress,
     postalCode,
@@ -13,51 +15,56 @@ const RegisterShop = (props) => {
     shopEmail,
     salesTax,
     termsOfUse,
-  } = props.formField;
+  },
+}) => {
   return (
-    <>
-      <Grid container spacing={2}>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          item
-          xs={12}
-        >
-          <Fields formik={props.formik} field={shopImg} />
-        </Grid>
-        <Grid item xs={10}>
-          <Fields field={shopAddress} />
-        </Grid>
-        <Grid item xs={2}>
-          <Fields field={postalCode} />
-        </Grid>
-        <Grid item xs={6}>
-          <Fields field={shopName} />
-        </Grid>
-        <Grid item xs={6}>
-          <Fields field={shopSite} />
-        </Grid>
-        <Grid item xs={6}>
-          <Fields formik={props.formik} field={shopType} />
-        </Grid>
-        <Grid item xs={6}>
-          <Fields field={shopPhoneNumber} />
-        </Grid>
-        <Grid item xs={12}>
-          <Fields field={shopEmail} />
-        </Grid>
-        <Grid item xs={12}>
-          <Fields field={salesTax} />
-        </Grid>
-        <Grid item xs={12}>
-          <Fields formik={props.formik} field={termsOfUse} />
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={0}
+        direction='column'
+        alignItems='center'
+        justifyContent='center'
+        item
+        xs={12}
+      >
+        <Fields formik={formik} Field={shopImg} />
       </Grid>
-    </>
-  );
-};
+      <Grid item xs={10}>
+        <Fields Field={shopAddress} />
+      </Grid>
+      <Grid item xs={2}>
+        <Fields Field={postalCode} />
+      </Grid>
+      <Grid item xs={6}>
+        <Fields Field={shopName} />
+      </Grid>
+      <Grid item xs={6}>
+        <Fields Field={shopSite} />
+      </Grid>
+      <Grid item xs={6}>
+        <Fields formik={formik} Field={shopType} />
+      </Grid>
+      <Grid item xs={6}>
+        <Fields Field={shopPhoneNumber} />
+      </Grid>
+      <Grid item xs={12}>
+        <Fields Field={shopEmail} />
+      </Grid>
+      <Grid item xs={12}>
+        <Fields Field={salesTax} />
+      </Grid>
+      <Grid item xs={12}>
+        <Fields formik={formik} Field={termsOfUse} />
+      </Grid>
+    </Grid>
+  )
+}
+RegisterShop.propTypes = {
+  formik: PropTypes.shape({
+    setFieldValue: PropTypes.func,
+  }).isRequired,
 
-export default RegisterShop;
+  formField: PropTypes.objectOf(PropTypes.object).isRequired,
+}
+export default RegisterShop

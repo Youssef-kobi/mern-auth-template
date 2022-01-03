@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { AuthContextProvider } from "./store/authContext";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { AuthContextProvider } from './store/authContext'
 
 ReactDOM.render(
   <AuthContextProvider>
@@ -10,5 +10,5 @@ ReactDOM.render(
       <App />
     </React.StrictMode>
   </AuthContextProvider>,
-  document.getElementById("root")
-);
+  document.getElementById('root')
+)

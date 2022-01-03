@@ -1,60 +1,58 @@
-import React, { useContext, useEffect } from "react";
-import { Formik, Form } from "formik";
-import Fields from "../Fields/Fields";
-import Classes from "./Login.module.css";
-import { Grid, Button, CircularProgress } from "@material-ui/core";
-import validationSchema from "./Validations";
-import axios from "axios";
-import AuthContext from "../../../store/authContext";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from 'react'
+import { Formik, Form } from 'formik'
+import { Grid, Button, CircularProgress } from '@material-ui/core'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Fields from '../Fields/Fields'
+import Classes from './Login.module.css'
+import validationSchema from './Validations'
+import AuthContext from '../../../store/authContext'
 
 const Login = () => {
-  const AuthCtx = useContext(AuthContext);
-  const navigate = useNavigate();
+  const AuthCtx = useContext(AuthContext)
+  const navigate = useNavigate()
   useEffect(() => {
     if (AuthCtx.isLoggedIn) {
-      console.log(AuthCtx.isLoggedIn)
-      navigate("/");
+      navigate('/')
     }
+  }, [AuthCtx.isLoggedIn])
 
-  },)
- 
   const submitForm = async (values, actions) => {
-    const { email, password } = values;
+    const { email, password } = values
     axios
-      .post("http://localhost:8000/api/users/login", { email, password })
+      .post('http://localhost:8000/api/users/login', { email, password })
       .then((response) => {
-        AuthCtx.login(response.data.token);
-        navigate("/");
+        AuthCtx.login(response.data.token)
+        navigate('/')
       })
       .catch((error) => {
         if (error.response) {
-          actions.setFieldError("email", "email is already used");
-          console.log(error.response);
-          console.log("server responded");
+          actions.setFieldError('email', 'email is already used')
         } else if (error.request) {
-          console.log("network error");
+          // eslint-disable-next-line no-console
+          console.log('network error')
         } else {
-          console.log(error);
+          // eslint-disable-next-line no-console
+          console.log(error)
         }
-      });
-  };
+      })
+  }
   const Loginfields = {
     email: {
-      name: "email",
-      label: "Email *",
-      type: "text",
+      name: 'email',
+      label: 'Email *',
+      type: 'text',
     },
     password: {
-      name: "password",
-      label: "Password *",
-      type: "password",
+      name: 'password',
+      label: 'Password *',
+      type: 'password',
     },
-  };
+  }
   const initialValues = {
-    email: "",
-    password: "",
-  };
+    email: '',
+    password: '',
+  }
   return (
     <div className={Classes.main}>
       <Formik
@@ -66,19 +64,19 @@ const Login = () => {
           <Form className={Classes.form}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Fields field={Loginfields.email} />
+                <Fields Field={Loginfields.email} />
               </Grid>
               <Grid item xs={12}>
-                <Fields field={Loginfields.password} />
+                <Fields Field={Loginfields.password} />
               </Grid>
             </Grid>
             <div className={Classes.btnsflex}>
               <div>
                 <Button
                   disabled={formik.isSubmitting}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
+                  type='submit'
+                  variant='contained'
+                  color='primary'
                 >
                   Submit
                 </Button>
@@ -89,6 +87,6 @@ const Login = () => {
         )}
       </Formik>
     </div>
-  );
-};
-export default Login;
+  )
+}
+export default Login
